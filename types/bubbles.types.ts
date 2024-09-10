@@ -6,6 +6,7 @@ export enum PriceChangePercentage {
   WEEK = "price_change_percentage_7d_in_currency",
   MONTH = "price_change_percentage_30d_in_currency",
   YEAR = "price_change_percentage_1y_in_currency",
+  MARKET_CAP = "market_cap",
 }
 
 export type Circle = {

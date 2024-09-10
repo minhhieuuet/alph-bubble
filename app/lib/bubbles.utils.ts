@@ -25,7 +25,7 @@ const { wallDamping, width, height, speed, elasticity, maxCircleSize, minCircleS
 const changeSizeStep = 2;
 
 export class BubblesUtils {
-  static getScalingFactor = (data: CoingeckoCoinData[], bubbleSort: PriceChangePercentage = PriceChangePercentage.HOUR): number => {
+  static getScalingFactor = (data: CoingeckoCoinData[], bubbleSort: PriceChangePercentage = PriceChangePercentage.MARKET_CAP): number => {
     if (!data) return 1;
     const max = data.map((item) => Math.abs(+item[bubbleSort]!));
     let totalSquare = 0;
@@ -179,13 +179,13 @@ export class BubblesUtils {
     }
   };
 
-  static generateCircles = (coins: CoingeckoCoinData[], scalingFactor: number, bubbleSort: PriceChangePercentage = PriceChangePercentage.HOUR) => {
+  static generateCircles = (coins: CoingeckoCoinData[], scalingFactor: number, bubbleSort: PriceChangePercentage = PriceChangePercentage.MARKET_CAP) => {
     const shapes: Circle[] = coins.map((item) => {
       const radius = Math.abs(item[bubbleSort]! * scalingFactor);
 
       const data = {
         id: item.id,
-        symbol: item.symbol.slice(0, 4),
+        symbol: item.symbol,
         image: item.image,
         coinName: item.symbol,
         x: Math.random() * (width - radius * 2),

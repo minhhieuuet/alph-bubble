@@ -4,20 +4,33 @@ export const dynamic = "force-dynamic";
 
 async function getCoins(): Promise<CoingeckoCoinData[]> {
   const response = await fetch(
-    "https://api.coingecko.com/api/v3/" +
-      "coins/markets?" +
-      "vs_currency=usd" +
-      "&order=market_cap_desc" +
-      "&per_page=250" +
-      `&page=${1}` +
-      "&sparkline=true" +
-      "&price_change_percentage=1h%2C24h%2C7d%2C30d%2C1y" +
-      "&locale=en" +
-      `&x_cg_demo_api_key=${process.env.COINGECKO_API_SECRET_KEY}`
-  );
+    "https://api.mobula.io/api/1/market/query/token?sortBy=volume_24h&sortOrder=desc&blockchain=Alephium"
+      );
+  const rawData = await response.json();
+  // console.log(rawData.data);
+  const data = rawData.data.map((coin: any) => {
+    
+    return {
+      id: coin.id,
+      symbol: coin.symbol,
+      name: coin.name,
+      image: coin.logo,
+      price_change_percentage_1h_in_currency: coin.pairs[0].price_change_24h,
+      market_cap: coin.pairs[0].liquidity,
+    };
+  }).filter((coin: any) => coin.id !== null);
+  console.log(data);
 
-  const data = await response.json();
+  // const data = await response.json();
+  // const data = [{
+  //   "id": "bitcoin",
+  //   "symbol": "btc",
+  //   "name": "Bitcoin",
+  //   "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+  //   "price_change_percentage_1h_in_currency": 0.6599942315009569,
+  //   }]
 
+    //@ts-ignore
   return data;
 }
 

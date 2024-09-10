@@ -19,7 +19,7 @@ export default function Bubbles({ coins = [] }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [circles, setCircles] = useState<Circle[] | null>(null);
-  const [bubbleSort, setBubbleSort] = useState(PriceChangePercentage.HOUR);
+  const [bubbleSort, setBubbleSort] = useState(PriceChangePercentage.MARKET_CAP);
 
   const appRef = React.useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,7 @@ export default function Bubbles({ coins = [] }: Props) {
 
   useEffect(() => {
     if (coins) {
-      const scalingFactor = BubblesUtils.getScalingFactor(coins, PriceChangePercentage.HOUR);
+      const scalingFactor = BubblesUtils.getScalingFactor(coins, PriceChangePercentage.MARKET_CAP);
       const shapes = BubblesUtils.generateCircles(coins, scalingFactor);
       setCircles(shapes);
     }

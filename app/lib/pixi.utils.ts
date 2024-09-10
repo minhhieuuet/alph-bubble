@@ -15,7 +15,7 @@ export class PixiUtils {
   };
 
   static createImageSprite = (circle: Circle) => {
-    const imgUrl = `/assets/coins/${circle.id}.${"png"}`;
+    const imgUrl = `https://raw.githubusercontent.com/alephium/token-list/master/logos/${circle.symbol}.png`;
 
     const imageSprite = PIXI.Sprite.from(imgUrl);
     const isFullSize = circle.radius * 0.3 < 10;
