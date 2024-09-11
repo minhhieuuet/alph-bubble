@@ -100,13 +100,14 @@ export default function Bubbles({ coins = [] }: Props) {
       const min = minCircleSize;
 
       circles.forEach((circle) => {
+        console.log(`circle`, circle)
         if (!circle[bubbleSort]) return;
 
         const radius = Math.abs(Math.floor(circle[bubbleSort] * scalingFactor));
         circle.targetRadius = radius > max ? max : radius > min ? radius : min;
-        circle.color = circle[bubbleSort] > 0 ? "green" : "red";
+        circle.color = circle[PriceChangePercentage.HOUR] > 0 ? "green" : "red";
         if (circle.text2) {
-          circle.text2.text = circle[bubbleSort].toFixed(2) + "%";
+          circle.text2.text = circle[PriceChangePercentage.HOUR].toFixed(2) + "%";
         }
       });
     }

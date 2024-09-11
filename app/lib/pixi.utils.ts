@@ -47,11 +47,11 @@ export class PixiUtils {
     const isTextVisible = fontSize > 10;
 
     const text2Style = new PIXI.TextStyle({
-      fontSize: isTextVisible ? fontSize + "px" : 0,
+      fontSize: isTextVisible ? fontSize + "px" : "10px",
       fill: "#ffffff",
     });
 
-    const data = circle[bubbleSort] ? circle[bubbleSort]!.toFixed(2) + "%" : "No data";
+    const data = circle[PriceChangePercentage.HOUR] ? circle[PriceChangePercentage.HOUR]!.toFixed(2) + "%" : "No data";
 
     const text2 = new PIXI.Text(data, text2Style);
     text2.anchor.set(0.5);

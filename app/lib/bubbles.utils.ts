@@ -192,7 +192,7 @@ export class BubblesUtils {
         y: Math.random() * (height - radius * 2),
         vx: Math.random() * speed * 2 - speed,
         vy: Math.random() * speed * 2 - speed,
-        color: item[bubbleSort]! > 0 ? "green" : "red",
+        color: item[PriceChangePercentage.HOUR]! > 0 ? "green" : "red",
         targetRadius: radius > maxCircleSize ? maxCircleSize : radius > minCircleSize ? radius : minCircleSize,
         radius: minCircleSize,
         dragging: false,

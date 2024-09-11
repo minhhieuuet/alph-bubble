@@ -4,21 +4,24 @@ export const dynamic = "force-dynamic";
 
 async function getCoins(): Promise<CoingeckoCoinData[]> {
   const response = await fetch(
-    "https://api.mobula.io/api/1/market/query/token?sortBy=volume_24h&sortOrder=desc&blockchain=Alephium"
+    "https://api.alphtradingbot.com/api/analytics/top-coins"
       );
-  const rawData = await response.json();
-  // console.log(rawData.data);
-  const data = rawData.data.map((coin: any) => {
+      const rawData = await response.json();
+      // console.log(rawData.data);
+      console.log(rawData.data);
+  let data = rawData.data.map((coin: any) => {
     
     return {
-      id: coin.id,
-      symbol: coin.symbol,
-      name: coin.name,
-      image: coin.logo,
-      price_change_percentage_1h_in_currency: coin.pairs[0].price_change_24h,
-      market_cap: coin.pairs[0].liquidity,
+      id: 1,
+      symbol: coin.pair.token1.symbol,
+      name: coin.pair.token1.name,
+      image: coin.pair.token1.logo,
+      price_change_percentage_1h_in_currency: coin.price_change_24h,
+      market_cap: coin.pair.liquidity,
     };
-  }).filter((coin: any) => coin.id !== null);
+  }).filter((coin: any) => coin.id !== null).filter((coin: any) => coin.price_change_percentage_1h_in_currency);
+  // unique by symbol
+data = data.filter((v: any, i: any, a: any) => a.findIndex((t: any) => (t.symbol === v.symbol)) === i);
   console.log(data);
 
   // const data = await response.json();
