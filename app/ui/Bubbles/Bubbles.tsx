@@ -101,8 +101,9 @@ export default function Bubbles({ coins = [] }: Props) {
 
       circles.forEach((circle) => {
         console.log(`circle`, circle)
+        //@ts-ignore
         if (!circle[bubbleSort]) return;
-
+        //@ts-ignore
         const radius = Math.abs(Math.floor(circle[bubbleSort] * scalingFactor));
         circle.targetRadius = radius > max ? max : radius > min ? radius : min;
         circle.color = circle[PriceChangePercentage.HOUR] > 0 ? "green" : "red";

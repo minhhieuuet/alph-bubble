@@ -20,9 +20,16 @@ async function getCoins(): Promise<CoingeckoCoinData[]> {
       market_cap: coin.pair.liquidity,
     };
   }).filter((coin: any) => coin.id !== null).filter((coin: any) => coin.price_change_percentage_1h_in_currency);
-  // unique by symbol
-data = data.filter((v: any, i: any, a: any) => a.findIndex((t: any) => (t.symbol === v.symbol)) === i);
-  console.log(data);
+  // unique by symbol, and get the bigger market cap
+  const uniqueSymbols: string[] = Array.from(new Set(data.map((a: any) => a.symbol)));
+  let coinDataBySymbol = {} as any;
+  uniqueSymbols.forEach((symbol) => {
+    coinDataBySymbol[symbol] = data.filter((a: any) => a.symbol === symbol).reduce((prev: any, current: any) => {
+      return (prev.market_cap > current.market_cap) ? prev : current;
+    });
+  });
+  data = Object.values(coinDataBySymbol);
+
 
   // const data = await response.json();
   // const data = [{
